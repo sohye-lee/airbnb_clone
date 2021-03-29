@@ -8,6 +8,7 @@ django = "*"
 black = "*"
 flake8 = "*"
 pillow = "*"
+django-admin = "*"
 
 [dev-packages]
 flake8 = "*"
