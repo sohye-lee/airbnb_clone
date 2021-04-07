@@ -5,6 +5,14 @@ from . import models
 class ItemAdmin(admin.ModelAdmin):
 
     """ ITEM ADMIN DEFINITION """
+
+    list_display = (
+        "name", 
+        "used_by",
+    )
+    
+    def used_by(self, obj):
+        return obj.rooms.count()
     pass
 
 @admin.register(models.Room)
@@ -75,10 +83,21 @@ class RoomAdmin(admin.ModelAdmin):
     )
 
     def count_amenities(self, obj):
-        return len(obj.amenities)
+        return obj.amenities.count()
+
+    def count_photos(self, obj):
+        return obj.photos.count()
 
 @admin.register(models.Photo)
 class PhotoAdmin(admin.ModelAdmin):
 
     """ PHOTO ADMIN DEFINITION """
-    pass
+    list_display = (
+        '__str__',
+        'get_thumbnail',
+    )
+
+    def get_thumbnail(self, obj):
+        print(obj.file)
+        return "thumb"
+    get_thumbnail.short_description = "Thumbnail"
