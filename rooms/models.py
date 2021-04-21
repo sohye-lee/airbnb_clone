@@ -75,9 +75,25 @@ class Room(core_models.TimeStampedModel):
     def __str__(self):
         return self.name
 
+    def save(self, *args, **kwargs):
+        words = self.city.split(" ")
+        cityname = []
+        for word in words:
+            cityname.append(str.capitalize(word))
+        self.city = ' '.join(cityname)
+
+        words_title = self.name.split(" ")
+        titlewords = []
+        for word in words_title:
+            titlewords.append(str.capitalize(word))
+        self.name = ' '.join(titlewords)
+        super().save(*args, **kwargs)
+
     def total_rating(self):
         all_reviews = self.reviews.all()
         all_ratings = 0
-        for review in all_reviews:
-            all_ratings += review.rating_average()
-        return all_ratings / len(all_reviews) 
+        if len(all_reviews) > 0:
+            for review in all_reviews:
+                all_ratings += review.rating_average()
+            return round(all_ratings / len(all_reviews))
+        return 0
