@@ -1,7 +1,8 @@
-<header>
-    <ul id="navbar" style="display: flex">
-        <li class="nav__item"><a href="#">Login</a></li>
-        <li class="nav__item"><a href="#">Signup</a></li>
-        <li class="nav__item"><a href="#">Contact</a></li>
+<header style="display: flex; align-items: center; padding: 1rem;">
+    <a href="{% url 'core:home' %}">AirNomad</a>
+    <ul id="navbar" style="display: flex; list-style: none;">
+        <li class="nav__item" style="margin-right: 30px;"><a href="#">Login</a></li>
+        <li class="nav__item" style="margin-right: 30px;"><a href="#">Signup</a></li>
+        <li class="nav__item" style="margin-right: 30px;"> <a href="#">Contact</a></li>
     </ul>
 </header>

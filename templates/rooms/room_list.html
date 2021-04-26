@@ -6,7 +6,10 @@
 {% block content %}
 {{now}}
     {% for room in rooms %}
-        <h2>{{room.name}} / ${{room.price}}- {{room.beds}} beds</h2>
+        <!-- <a href="/rooms/{{room.pk}}"> -->
+        <a href="{% url 'rooms:detail' room.pk %}">
+            <h4>{{room.name}} / ${{room.price}}- {{room.beds}} beds</h4>
+        </a>    
     {% endfor %}
     <h5>
         {% if page_obj.has_previous %}
