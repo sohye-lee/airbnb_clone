@@ -1,6 +1,9 @@
-from django.utils import timezone
-from django.views.generic import ListView
+# from django.utils import timezone
+from django.views.generic import ListView, DetailView, UpdateView
 from django.shortcuts import render
+# from django.http import Http404
+# from django.shortcuts import render, redirect
+# from django.urls import reverse
 from . import models
 
 class HomeView(ListView):
@@ -13,14 +16,50 @@ class HomeView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        now = timezone.now() 
-        context["now"] = now
+        # now = timezone.now() 
+        # context["now"] = now
         return context
 
-def room_detail(request, pk):
-    room = models.Room.Objects.get(pk=pk)
-    return render(request, "rooms/detail.html", {"room": room})
+# CLASS VIEW
+class RoomDetail(DetailView):
+    model = models.Room
+    
 
+class EditRoomView(UpdateView):
+    model = models.Room
+    template_nme = "rooms/room_edit.html"
+    fields = (
+        "name",
+        "description",
+        "country",
+        "city",
+        "price",
+        "address",
+        "guests",
+        "beds",
+        "bedrooms",
+        "baths",
+        "check_in",
+        "check_out",
+        "instant_book",
+        "room_type",
+        "amenities",
+        "facilities",
+        "house_rules",
+    )
+
+def search(request):
+    return render(request, "books/search.html")
+
+
+# FUNCTION VIEW
+# def room_detail(request, pk):
+#     try:
+#         room = models.Room.objects.get(pk=pk)
+#         return render(request, "rooms/detail.html", {"room": room})
+#     except models.Room.DoesNotExist:
+#         # return redirect(reverse("core:home")) <--* to home (always should use reverse)*-->
+#         raise Http404()
 
 
 

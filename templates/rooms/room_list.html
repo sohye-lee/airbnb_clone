@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 {% block page_name %}
-    Home
+    Rooms
 {% endblock page_name %}
 
 {% block content %}
-{{now}}
+<!-- {{now}} -->
     {% for room in rooms %}
         <!-- <a href="/rooms/{{room.pk}}"> -->
         <a href="{% url 'rooms:detail' room.pk %}">
