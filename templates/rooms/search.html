@@ -4,5 +4,21 @@
 {% endblock page_title %}
 
 {% block content %}
-    SEARCH
+    SEARCH : {{city}}
+
+    <form method="get"  action="{% url 'rooms:search' %}">
+        <div>
+            <label for="city">City</label>
+            <input value="{{city}}" id="city" type="text" name="city" placeholder="Search By city" />
+        </div>
+        <div>
+            <label for="country">Country</label>
+            <select name="country" id="country">
+                {% for c in countries %}
+                <option value="{{c.code}}">{{c.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button>Search</button>
+    </form>
 {% endblock content %}

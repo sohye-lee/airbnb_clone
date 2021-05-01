@@ -1,6 +1,7 @@
 # from django.utils import timezone
 from django.views.generic import ListView, DetailView, UpdateView
 from django.shortcuts import render
+from django_countries import countries
 # from django.http import Http404
 # from django.shortcuts import render, redirect
 # from django.urls import reverse
@@ -11,14 +12,13 @@ class HomeView(ListView):
     paginate_by = 10
     paginate_orphans = 3
     ordering = "created"
-    page_kwarg = 'page'
     context_object_name = "rooms"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
         # now = timezone.now() 
         # context["now"] = now
-        return context
+        # return context
 
 # CLASS VIEW
 class RoomDetail(DetailView):
@@ -49,7 +49,10 @@ class EditRoomView(UpdateView):
     )
 
 def search(request):
-    return render(request, "books/search.html")
+    city = request.GET.get("city", "Anywhere")
+    city = str.capitalize(city)
+    print(countries)
+    return render(request, "rooms/search.html", {"city": city, "countries": countries})
 
 
 # FUNCTION VIEW

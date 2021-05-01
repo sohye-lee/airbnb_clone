@@ -1,0 +1,11 @@
+
+{% if user.is_authenticated %}
+    <li class="nav__item" style="margin-right: 30px;"><a href="{% url 'users:login' %}">Log Out</a></li>
+{% else %}
+    <li class="nav__item" style="margin-right: 30px;"><a href="{% url 'users:login' %}">Login</a></li>
+{% endif %}
+
+    <li class="nav__item" style="margin-right: 30px;"><a href="#">Signup</a></li>
+    <li class="nav__item" style="margin-right: 30px;"> <a href="#">Contact</a></li>
+
+

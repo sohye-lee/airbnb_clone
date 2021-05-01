@@ -5,5 +5,4 @@ app_name = "core"
 
 urlpatterns = [
     path("", room_views.HomeView.as_view(), name="home"),
-    # path("login")
 ]

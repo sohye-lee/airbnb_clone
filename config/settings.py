@@ -13,7 +13,8 @@ import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+# BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # Quick-start development settings - unsuitable for production
@@ -23,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '3rc4izod0bv63=gop$a9k&!yz#f3#m3ot$lqgb*nf0q-mqwpr8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = "*"
 
@@ -93,7 +94,8 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        # 'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': os.path.join(BASE_DIR, "db.sqlite3"),
     }
 }
 
@@ -134,14 +136,18 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = '/static/'
 
+STATIC_URL = "/static/"
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+# STATICFILES_DIRS = []
 
 
 
 ##### USER SETTING TO CUSTOMIZE USER MODELS #####
 AUTH_USER_MODEL = 'users.User'
 
-MEDIA_ROOT = BASE_DIR / "uploads"
+# MEDIA_ROOT = BASE_DIR / "uploads"
+MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")
 MEDIA_URL = "/media/"
