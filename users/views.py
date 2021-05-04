@@ -19,7 +19,6 @@ class LoginView(View):
             if user is not None:
                 login(request, user)
                 return redirect(reverse("core:home"))
-
                 
         return render(request, "users/login.html", {"forms": forms})
         
